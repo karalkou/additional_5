@@ -27,7 +27,6 @@ module.exports = function check(str, bracketsConfig) {
                     return false;
                 }else{
                     if ( stack[stack.length-1] !== tokens[j][0] ){
-                        stack.pop();
                         return false;
                     }else{
                         stack.pop();
