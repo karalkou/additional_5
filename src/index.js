@@ -6,6 +6,7 @@ module.exports = function check(str, bracketsConfig) {
     for( let i=0; i<strArr.length; i+=1 ){
 
         for(let j=0; j<tokens.length; j+=1) {
+
             if (tokens[j][0] === tokens[j][1] && tokens[j][0] === strArr[i]) {
                 if (stack[stack.length - 1] !== strArr[i]) {
                     stack.push(strArr[i]);
@@ -20,18 +21,24 @@ module.exports = function check(str, bracketsConfig) {
                 stack.push(strArr[i]);
                 break;
             }else if( strArr[i] === tokens[j][1] ){
+                // console.log('current strArr['+i+']: ', strArr[i]);
                 if( stack.length === 0 ){
                     return false;
                 }else{
-                    if ( strArr[i-1] === tokens[j][0] ){
+                    // console.log('stack: ', stack);
+                    // console.log('stack['+(stack.length-1)+']    : ', stack[stack.length-1]);
+                    // console.log('tokens['+j+']['+0+']: ', tokens[j][0]);
+                    // console.log('tokens['+j+']['+1+']: ', tokens[j][1]);
+                    if ( stack[stack.length-1] !== tokens[j][0] ){
                         stack.pop();
-                    }else{
                         return false;
+                    }else{
+                        stack.pop();
                     }
                 }
-            }else{
-                break;
             }
+            // console.log('------------------------');
+
         }
 
 
